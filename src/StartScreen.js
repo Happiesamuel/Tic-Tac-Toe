@@ -31,6 +31,7 @@ function StartScreen() {
         </div>
         <div className="buts">
           <Button
+           disabled={!selectorId}
             onClick={() => dispatch({ type: "startGame", payload: 1 })}
             style={{
               background: "#32c3bd",
