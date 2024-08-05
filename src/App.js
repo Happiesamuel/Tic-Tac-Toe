@@ -1,23 +1,22 @@
-import logo from './logo.svg';
-import './App.css';
+import { useEffect, useState } from "react";
+import { useApp } from "./context/AppContext";
+import GameScreen from "./GameScreen";
+import Preloader from "./Preloader";
+import StartScreen from "./StartScreen";
 
 function App() {
+  const { status } = useApp();
+  const [load, setLoad] = useState(true);
+  useEffect(function () {
+    setTimeout(function () {
+      setLoad(false);
+    }, 2000);
+  });
+  if (load) return <Preloader />;
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      {status === "ready" && <StartScreen />}
+      {status === "start" && <GameScreen />}
     </div>
   );
 }
